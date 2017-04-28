@@ -19,10 +19,10 @@ def index():
 @app.route('/vids/<int:vid_id>', methods=['GET', 'PATCH', 'DELETE'])
 def oneVid(vid_id):
     if request.method == 'GET':
-        return jsonify(data=[models.Vids.query.get(vid_id).serialize])
+        return queries.get_vid(vid_id)
     elif request.method == 'PATCH':
-        return 'PATCH ' + str(vid_id)
-    else: return 'DELETE ' + str(vid_id)
+        return queries.patch_vid(vid_id, request.data)
+    else: return queries.delete_vid(vid_id)
 
 if __name__ == '__main__':
     app.debug = True
